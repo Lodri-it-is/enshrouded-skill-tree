@@ -12,6 +12,8 @@ export type Node = {
 export type NodeTypeMetadata = {
   name: string;
   description: string[];
+  leveldescription: string[];
+  level: number;
   hasIcon?: boolean;
   iconOffset?: number;
   hasAsset?: boolean;
@@ -44,53 +46,64 @@ const WET =
   "<b>Wet</b><br/>Reduces Stamina and Stamina Regeneration by <b>30%</b> for <b>15</b> minutes. Warmth reduces the remaining duration.";
 const SOAKED =
   "<b>Soaked</b><br/>Reduces Stamina and Stamina Regeneration by <b>30%</b> for <b>30</b> seconds. Also reduces <b>Ice and Shock Resistances</b> by <b>30%</b> but increases <b>Fire Resistances</b> by <b>30%</b>.<br><b>Soaked</b> can be applied to enemies. <br><b>Soaked</b> duration can not be reduced by warmth and <b>Wet</b> debuff starts after it is over.";
+const CHARGE =
+  "<b>Charge</b><br/>As the Updraft charges before activation, the resulting lift is increased. a full charge grants you an additional boost. The charge is accelerated while inside your base.";
 
 const SkillNodes: SkillNodesType = {
   types: {
-    GIANT_SLAYER_HOOK: {
+        GIANT_SLAYER_HOOK: {
       name: "GIANT SLAYER HOOK",
       description: [
-        "Use your Grappling Hook to pull yourself towards large enemies during combat.",
+        "Use your <b>Grappling Hook</b> to pull yourself towards large enemies during combat."
+		"<b>Cost:</b> 50 Stamina",
       ],
       hasIcon: true,
       color: "gold",
-      cost: 5,
+      cost: 3,
     },
     GROUNDING_HOOK: {
       name: "GROUNDING HOOK",
       description: [
-        "Use your Grappling Hook to pull flying enemies towards you during combat.",
+        "Use your <b>Grappling Hook</b> to pull <b>flying</b> enemies towards you during combat."
+		"<b>Cost:</b> 50 Stamina",
       ],
       hasIcon: true,
       color: "gold",
-      cost: 2,
+      cost: 4,
     },
     SAVIOUR: {
       name: "SAVIOUR",
       description: [
-        "You only need 3 instead of 6 seconds to <b>revive an ally</b>.",
+        "Time to revive an ally is reduced by <b>-1</b> seconds.",
+		"Default revive time is <b>6</b> seconds. ",
       ],
       color: "gold",
-      cost: 2,
+      cost: 1,
+	  leveldescription: "<b>-1</b> seconds per level"
+	  level: 3
     },
     BACKSTAB_DAMAGE: {
-      name: "BACKSTAB DAMAGE",
-      description: ["Increase the damage you deal from behind by 25%."],
-      color: "gold",
-      cost: 2,
-    },
+      name: "BACKSTAB Mastery",
+      description: ["<b>Backstab</b> damage is increased by 20%"],
+      color: "green",
+      cost: 1,
+ 	  leveldescription: "<b>20%</b> damage per level"
+	  level: 3
+   },
     OPPORTUNITY: {
       name: "OPPORTUNITY",
       description: [
-        "Increases the Multiplier of the Merciless Attack and the Sneak Attack by 100%.",
+        "Increases the damage multiplier of <b>Merciless Attacks</b> by 40%.",
       ],
       color: "gold",
-      cost: 3,
+      cost: 1,
+ 	  leveldescription: "<b>40%</b> damage per level"
+	  level: 3
     },
     MINER: {
       name: "MINER",
       description: [
-        "When you mine resources, you have a 10% chance to get one additional resource.",
+        "Mining resources has a <b>10%</b> chance to grant one additional resource.",
       ],
       color: "gold",
       cost: 4,
@@ -98,48 +111,59 @@ const SkillNodes: SkillNodesType = {
     LUMBERJACK: {
       name: "LUMBERJACK",
       description: [
-        "Felling axes do 30% more damage against wooden objects including trees.",
+        "Tool deal <b>10%</b> increased damage against wood.",
+		"This includes trees an wooden terrain.",
       ],
       color: "gold",
-      cost: 2,
+      cost: 1,
+ 	  leveldescription: "<b>10%</b> damage per level"
+	  level: 3
     },
     QUALITY_GEAR: {
       name: "QUALITY GEAR",
-      description: ["All tools lose durability 50% slower."],
+      description: ["Tools have a <b>20%</b> chance to restore <b>1</b> durability point"],
       color: "gold",
       cost: 2,
     },
     MASON: {
       name: "MASON",
       description: [
-        "The Pickaxe deals 30% more damage against stone objects, including resource veins.",
+        "Tools deal <b>10%</b> increased damage against stone.",
+		"This includes stone terrain and gemstone veins.",
       ],
       color: "gold",
-      cost: 2,
+      cost: 1,
+ 	  leveldescription: "<b>10%</b> damage per level"
+	  level: 3
     },
     FISHERMANS_RESOLVE: {
       name: "FISHERMAN'S RESOLVE",
       description: [
-        "Increases your Fishing Endurance by <b>30%</b>.",
+        "Increases your Fishing Endurance by <b>5</b>.",
         "Allows for extended battles with hooked fish.",
       ],
       color: "gold",
-      cost: 5,
+      cost: 2,
+ 	  leveldescription: "<b>5</b> Fishing Endurance per level"
+	  level: 3
     },
     POWER_PARRY: {
       name: "POWER PARRY",
       description: [
-        "Increases the enemy's stun bar gain on parry attacks.",
-        "<b>Parry</b><br>While equipped with a shield, press <b>[RMB] to block</b>. A well-timed block will <b>parry</b> the attack.",
+        "Your Parry Power is increased by <b>10%</b>.",
+        "<b>Parry</b><br>A ell-timed block with any Melee weapon or Shield will <b>parry</b> the attack and fill up the enemy's <i>Stun Bar</i>.",
+		OVERPOWER
       ],
       color: "gold",
-      cost: 2,
-    },
+      cost: 1,
+  	  leveldescription: "<b>10%</b> Parry Power per level"
+	  level: 3
+   },
     ATTR_SPIRIT: {
       name: "SPIRIT",
       description: [
-        "Increases your Spirit attribute by 1",
-        "Increases Mana by 20 per Attribute Point",
+        "Increases your Spirit attribute by 1.",
+        "Increases Mana by 20 per Attribute Point.",
       ],
       color: "blue",
       cost: 1,
@@ -148,8 +172,8 @@ const SkillNodes: SkillNodesType = {
     ATTR_INT: {
       name: "INTELLIGENCE",
       description: [
-        "Increases your Intelligence attribute by 1",
-        "Increases Magic damage by 5% per Attribute Point",
+        "Increases your Intelligence attribute by 1.",
+        "Increases Magic damage by 5% per Attribute Point.",
       ],
       color: "blue",
       cost: 1,
@@ -158,8 +182,8 @@ const SkillNodes: SkillNodesType = {
     ATTR_CONS: {
       name: "CONSTITUTION",
       description: [
-        "Increases your Constitution attribute by 1",
-        "Increases Health by 50 per Attribute Point",
+        "Increases your Constitution attribute by 1.",
+        "Increases Health by 50 per Attribute Point.",
       ],
       color: "red",
       cost: 1,
@@ -168,8 +192,8 @@ const SkillNodes: SkillNodesType = {
     ATTR_STR: {
       name: "STRENGTH",
       description: [
-        "Increases your Strength attribute by 1",
-        "Increases Melee damage by 5% per Attribute Point",
+        "Increases your Strength attribute by 1.",
+        "Increases Melee damage by 5% per Attribute Point.",
       ],
       color: "red",
       cost: 1,
@@ -178,8 +202,8 @@ const SkillNodes: SkillNodesType = {
     ATTR_ENDURANCE: {
       name: "ENDURANCE",
       description: [
-        "Increases your Endurance attribute by 1",
-        "Increases Stamina by 10 per Attribute Point",
+        "Increases your Endurance attribute by 1.",
+        "Increases Stamina by 10 per Attribute Point.",
       ],
       color: "green",
       cost: 1,
@@ -188,8 +212,8 @@ const SkillNodes: SkillNodesType = {
     ATTR_DEX: {
       name: "DEXTERITY",
       description: [
-        "Increases your Dexterity attribute by 1",
-        "Increases Bow and Dagger damage by 5% per Attribute Point",
+        "Increases your Dexterity attribute by 1.",
+        "Increases Bow and Dagger damage by 5% per Attribute Point.",
       ],
       color: "green",
       cost: 1,
@@ -198,17 +222,22 @@ const SkillNodes: SkillNodesType = {
     WELL_RESTED: {
       name: "WELL RESTED",
       description: [
-        "The base duration for the Rested buff is increased by 5 Minutes.",
-        "Increase the Comfort in your home to further increase the duration.",
+        "The base duration for the Rested buff is increased by <b>2</b> minutes.",
+        "<b>Rested</b><br>The Rested buff increases your Stamina Maximum and Regeneration significantly.",
+		"It requires <b>shelter, sitting or sleeping,</b> as well as <b>warmth</b> from a heat source.",
+		"The buff can be refreshed <b>anywhere.</b>"
+		"Surrounding comfort items further increase its duration."
       ],
       color: "gold",
       cost: 1,
+  	  leveldescription: "<b>2</b> minutes per level"
+	  level: 3
     },
     SNEAK_ATTACK: {
       name: "SNEAK ATTACK",
       description: [
-        "The <b>Sneak Attack</b> deals massive 10x damage to unaware enemies.",
-        "To trigger it, sneak up on an enemy and press <b>[E]</b>.",
+        "Perform a <b>Sneak Attack</b> by sneaking up to an unaware enemy and pressing <b>[E]</b>.",
+        "<b>Sneak Attack</b> deals <b>+900%</b> increased damage.",
       ],
       hasIcon: true,
       color: "gold",
@@ -217,7 +246,7 @@ const SkillNodes: SkillNodesType = {
     MERCILESS_ATTACK: {
       name: "MERCILESS ATTACK",
       description: [
-        "Perform a Merciless Attack by pressing [E] to deal massive damage to an enemy you've empowered.",
+        "Perform a <b>Merciless Attack</b> by pressing <b>[E]</b> to deal <b>+500%</b> damage to an <b>overpowered</b> enemy.",
         OVERPOWER,
       ],
       hasIcon: true,
@@ -227,17 +256,20 @@ const SkillNodes: SkillNodesType = {
     UPDRAFT: {
       name: "UPDRAFT",
       description: [
-        "Pressing the jump button while gliding will give you a small height boost. This skill can be used once per flight. Cost: 120 mana",
+        "Jumping with [SPACE] while gliding lifts you upwards. Can be used once per flight.",
+		CHARGE,
+		"<b>Cost:</b> 100 Mana"
       ],
       hasIcon: true,
       color: "green",
       cost: 4,
     },
     BEGONE: {
-      name: "BEGONE",
+      name: "BEGONE!",
       description: [
-        "A magic-powered punch that pushes and stuns hit foes.",
-        "Replaces your unarmed attacks as long as you have the necessary mana available: <b>30 Mana</b>",
+        "A magic-powered punch that pushes back and stuns enemies.",
+        "Replaces your unarmed attacks as long as you have the necessary Mana available.",
+		"<b>Cost:</b> 30 Mana",
       ],
       hasIcon: true,
       color: "blue",
