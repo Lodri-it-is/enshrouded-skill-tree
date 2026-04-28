@@ -243,37 +243,43 @@ const SkillNodes: SkillNodesType = {
       color: "blue",
       cost: 3,
     },
-    RADIANT_AURA: {
+        RADIANT_AURA: {
       name: "RADIANT AURA",
       description: [
-        "All Fell foes within 10 meters take 1 fire damage per intelligence per second.",
+        "All <b>Fell</b> enemies within <b>2</b> meters take <b>1 Fire</b> damage per Intelligence per second.",
       ],
       hasIcon: true,
       color: "blue",
-      cost: 3,
+      cost: 1,
+	  leveldescription: "<b>2</b> meters range and <b>1 Fire</b> damage per Intelligence per level",
+	  level: 1,
     },
     WATER_AURA: {
       name: "WATER AURA",
       description: [
-        "You emit a healing aura. It heals all injured allies within 15 meters. The healing scales with your intelligence attribute (1 health for every 2 points of intelligence).",
+        "You emit a healing aura that heals you and all injured allies within <b>5</b> meters.",
+		"The healing scales with your intelligence attribute and restores <b>1</b> Health per <b>2</b> points of intelligence.",
       ],
       hasIcon: true,
       color: "blue",
-      cost: 3,
+      cost: 1,
+	  leveldescription: "<b>5</b> meters per level",
+	  level: 3,
     },
     MARTYR: {
       name: "MARTYR",
       description: [
-        "When you are killed by an enemy, all allies within 50 meters will heal 30% of their maximum health.",
+        "When you are killed by an enemy, all allies within 30 meters are healed for <b>50%</b> of their maximum health.",
+		"They also receive a <b>Final Blessing</b> buff, increasing their maximum Health by <b>100</b> points for <b>15</b> minutes.",
       ],
       hasIcon: true,
-      color: "blue",
-      cost: 5,
+      color: "red",
+      cost: 3,
     },
     DIVINE_SURGE: {
       name: "DIVINE SURGE",
       description: [
-        "Healing spells can perform Critical Strikes that scale with your Critical Strike Damage.",
+        "Healing spells can perform Critical Strikes that scale with your Critical Strike damage.",
       ],
       color: "blue",
       cost: 5,
@@ -281,15 +287,19 @@ const SkillNodes: SkillNodesType = {
     RIGHTEOUS_FIRE: {
       name: "RIGHTEOUS FIRE",
       description: [
-        "Healing any target with a spell triggers a burst of fire that deals <b>50%</b> of the heal amount as <b>Fire</b> damage to nearby <b>Fell</b> enemies.",
+        "Healing any target with a spell triggers a burst of fire that deals <b>20%</b> of the heal amount as <b>Fire</b> damage to nearby <b>Fell</b> enemies.",
       ],
       color: "blue",
-      cost: 5,
+      cost: 2,
+	  leveldescription: "<b>20% Fire</b> damage per level",
+	  level: 3,
     },
     BLINK: {
       name: "BLINK",
       description: [
-        "Replaces the Dodge Roll ability with a short range teleport.",
+        "Replaces the Dodge Roll ability with a short-range teleport.",
+		"Blink also replaces the sideways Dodge Roll of the Strategig Maneuver skill",
+		"<b>Cost:</b> 20 Stamina"
       ],
       hasIcon: true,
       color: "blue",
@@ -298,7 +308,8 @@ const SkillNodes: SkillNodesType = {
     EVASION_ATTACK: {
       name: "EVASION ATTACK",
       description: [
-        "When equipped with a melee weapon, you can perform an evade attack which dashes towards the enemy and deals more weapon damage with <b>[LMB]</b>",
+        "When equipped with a Melee weapon, you can perform an evade attack, which dashes towards the enemy and deals more weapon damage with <b>[LMB]</b>",
+		"<b>Cost:</b> 20 Stamina",
         BLOCK_BREAKER,
       ],
       hasIcon: true,
@@ -308,11 +319,13 @@ const SkillNodes: SkillNodesType = {
     EARTH_AURA: {
       name: "EARTH AURA",
       description: [
-        "Shields allies and yourself, reducing incoming damage by 10%",
+        "You emit a protective aura that increases Physical an Magical Resistances by <b>10%</b> for you and all allies within <b>4</b> meters.",
       ],
       hasIcon: true,
       color: "red",
-      cost: 5,
+      cost: 2,
+	  leveldescription: "<b>4</b>" meters range per level;
+	  level: 3,
     },
     NEMESIS: {
       name: "NEMESIS",
